@@ -1,4 +1,6 @@
-# adventofcode2020
+# adventofcode
+
+Folders based on the year.
 Name of the files based on challenge with following format:
 Day x - part-x . fileFormat based on language
 For example 
