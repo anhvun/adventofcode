@@ -7,13 +7,14 @@ const rows = document.querySelector("body>pre")
     .innerText
     .split("\n");
 
-const amountOfStepsRightNeeded = speedDown * speedRight;
+const rightToDownRatio = speedRight / speedDown;
 
-const repeatsNeeded = Math.ceil(rows.length / ([...rows[0]].length / amountOfStepsRightNeeded));
-
+const repeatsNeeded = Math.ceil(rows.length * rightToDownRatio / [...rows[0]].length);
 
 const extendedRows = rows.map(x => x.repeat(repeatsNeeded));
 
 const treesCount = extendedRows.filter((extendedRow, index) =>
-    [...extendedRow][index * speedRight] === '#'
+    [...extendedRow][index * rightToDownRatio] === '#'
 ).length;
+
+console.log(treesCount);
