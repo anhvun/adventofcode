@@ -10,18 +10,17 @@ const upperRow = "B";
 const lowerCol = "L";
 const upperCol = "R";
 
-/*const seats = document.querySelector("body>pre")
+const seats = document.querySelector("body>pre")
     .innerText
-    .split("\n");*/
+    .split("\n");
 
-const seats = ["FBFBBFFRLR"];
 
 function splitRange(seat, letter) {
     let rowsRange = seat.rows.split("-");
     let colsRange = seat.cols.split("-");
 
-    let rowSize = +rowsRange[1]- +rowsRange[0];
-    let colSize = +colsRange[1]- +colsRange[0];
+    let rowSize = +rowsRange[1] - +rowsRange[0];
+    let colSize = +colsRange[1] - +colsRange[0];
 
     switch (letter) {
         case lowerRow:
@@ -32,32 +31,28 @@ function splitRange(seat, letter) {
             break;
         case lowerCol:
             colsRange[1] = +colsRange[1] - (colSize + 1) / 2;
-            //console.log(colsRange);
             break;
         case upperCol:
             colsRange[0] = +colsRange[0] + (colSize + 1) / 2;
-            //console.log(colsRange);
             break;
     }
 
-
     return {
-        rows: typeof(rowsRange[1]) === "undefined" ? `${rowsRange[0]}` : `${rowsRange[0]}-${rowsRange[1]}`,
-        cols: typeof(colsRange[1]) === "undefined" ? `${colsRange[0]}` : `${colsRange[0]}-${colsRange[1]}`
+        rows: `${rowsRange[0]}-${rowsRange[1]}`,
+        cols: `${colsRange[0]}-${colsRange[1]}`
     }
 }
 
 const foundSeats = seats.map(seat => {
     return [...seat].reduce((s, letter) => {
-        console.log(splitRange(s, letter));
         return splitRange(s, letter);
     }, startSeat);
 });
 
-/*const highestSeatId = foundSeats.reduce((previousSeatId, foundSeat) => {
-        let seatId = 8 * foundSeat.rows + foundSeat.cols;
+const highestSeatId = foundSeats.reduce((previousSeatId, foundSeat) => {
+        let seatId = 8 * parseInt(foundSeat.rows.split("-")[0]) + parseInt(foundSeat.cols.split("-")[0]);
         return (seatId > previousSeatId) ? seatId : previousSeatId;
     }, 0
 )
-*/
-//console.log(highestSeatId);
+
+console.log(highestSeatId);
