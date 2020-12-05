@@ -46,6 +46,11 @@ function getEndSeat(seat) {
 }
 
 const foundSeats = seats.map(s => getEndSeat(s));
-const biggestSeatId = foundSeats.sort((a, b) => b.seatId - a.seatId)[0].seatId;
-
-console.log(biggestSeatId);
+foundSeats.sort((a, b) => a.seatId - b.seatId).forEach((seat, index) => {
+    if(index > 0 && index < foundSeats.length - 1){
+        if (seat.seatId + 1 !== foundSeats[index + 1].seatId && seat.seatId + 2 === foundSeats[index + 1].seatId) {
+            // the missing one, since there's a hole in id list, and next one takes the value of the other that's supposed to be after
+            console.log(seat.seatId + 1);
+        }
+    }
+});
